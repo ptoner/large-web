@@ -1,9 +1,9 @@
 import {Buffer} from 'buffer'
+import Core from 'large-core';
 
 class UploadService {
 
   constructor(
-    private ipfs
   ) {}
 
   async uploadFile(fileElement) {
@@ -22,7 +22,7 @@ class UploadService {
         if (buf) {
 
           try {
-            ipfsCid = await self.ipfs.add( buf)
+            ipfsCid = await Core.ipfs.add( buf)
           } catch (ex) {
             reject(ex)
           }

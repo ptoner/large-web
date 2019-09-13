@@ -2,29 +2,32 @@ import { QuillService } from "./services/quill-service";
 import { UploadService } from "./services/upload-service";
 import { ModelView } from "./model-view"
 import { PromiseView } from "./promise-view"
-import { RouteService } from "./services/route-service";
+import { ModelViewService } from "./services/model-view-service";
 import { QueueService } from "./services/queue_service";
 import { UiService } from "./services/ui-service";
-import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
 import Quill = require('quill/dist/quill.js')
 
-import Framework7, { Dom7, Template7 } from "framework7";
-import { LargeWeb } from "./large-web";
+import { Dom7, Template7 } from "framework7";
+const Framework7: any = require('framework7/js/framework7.bundle')
 
+
+import { Web } from "./web";
+import { PostUIService } from "./services/post-ui-service";
 
 
 export {
     QuillService,
     UploadService,
     QueueService,
-    RouteService,
+    ModelViewService,
     UiService,
     ModelView,
     PromiseView,
     Dom7,
     Template7,
     Framework7,
-    QuillDeltaToHtmlConverter,
-    Quill,
-    LargeWeb 
+    PostUIService,
+    Quill
 }
+
+export default Web
