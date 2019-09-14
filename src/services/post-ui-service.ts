@@ -57,10 +57,10 @@ class PostUIService {
 
     private async buildPost(walletAddress: string, content: any, parent:Post=undefined) {
 
-        let dateString: string = moment().format().toString();
+        let dateString: string = moment().format().toString()
         
         //Get profile service of poster
-        let profile: Profile;
+        let profile: Profile
         
         try {
             profile = await this.profileService.getProfileByWallet(walletAddress);

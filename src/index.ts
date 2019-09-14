@@ -4,7 +4,6 @@ import { ModelView } from "./model-view"
 import { PromiseView } from "./promise-view"
 import { ModelViewService } from "./services/model-view-service";
 import { QueueService } from "./services/queue_service";
-import { UiService } from "./services/ui-service";
 import Quill = require('quill/dist/quill.js')
 
 import { Dom7, Template7 } from "framework7";
@@ -20,7 +19,6 @@ export {
     UploadService,
     QueueService,
     ModelViewService,
-    UiService,
     ModelView,
     PromiseView,
     Dom7,
