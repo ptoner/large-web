@@ -1,16 +1,16 @@
 import { PostService, ProfileService, SchemaService, ImageService, Post } from "large-core";
 declare class PostUIService {
-    private postService;
-    private profileService;
-    private schemaService;
-    private imageService;
+    postService: PostService;
+    profileService: ProfileService;
+    schemaService: SchemaService;
+    imageService: ImageService;
     setFeed(feed: any): void;
     constructor(postService: PostService, profileService: ProfileService, schemaService: SchemaService, imageService: ImageService);
     postMessage(content: any, walletAddress: string): Promise<Post>;
     postReply(parent: Post, content: any, walletAddress: string): Promise<Post>;
     private buildPost;
     getImagesFromPostContentOps(ops: any): string[];
-    getRecentPosts(limit: number, lt?: string, gt?: string): Promise<Post[]>;
+    getRecentPosts(offset: number, limit: number, lt?: string, gt?: string): Promise<Post[]>;
     loadPostImages(): Promise<void>;
     translatePost(post: Post): Promise<void>;
     translateContent(post: Post): string;

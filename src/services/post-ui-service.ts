@@ -14,10 +14,10 @@ class PostUIService {
 
 
     constructor(
-        private postService: PostService,
-        private profileService: ProfileService,
-        private schemaService: SchemaService,
-        private imageService: ImageService
+        public postService: PostService,
+        public profileService: ProfileService,
+        public schemaService: SchemaService,
+        public imageService: ImageService
     ) { }
 
     async postMessage(content: any, walletAddress: string) {
@@ -26,10 +26,12 @@ class PostUIService {
 
         //Load user's post feed
         await this.postService.loadPostFeedForWallet(walletAddress)
+        await this.postService.load(1)
         await this.postService.create(post)
 
         //Put in user's main feed too
         await this.postService.loadMainFeedForWallet(walletAddress)
+        await this.postService.load(1)
         await this.postService.create(post)
 
         await this.translatePost(post)
@@ -103,8 +105,8 @@ class PostUIService {
 
     }
 
-    async getRecentPosts(limit:number, lt:string=undefined, gt:string=undefined): Promise<Post[]> {
-        let posts:Post[] = await this.postService.getRecentPosts(limit, lt, gt)
+    async getRecentPosts(offset:number, limit:number, lt:string=undefined, gt:string=undefined): Promise<Post[]> {
+        let posts:Post[] = await this.postService.getRecentPosts(offset, limit, lt, gt)
 
         for (let post of posts) {
             await this.translatePost(post)

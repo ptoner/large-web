@@ -62,21 +62,27 @@ var PostUIService = /** @class */ (function () {
                     case 2:
                         //Load user's post feed
                         _a.sent();
+                        return [4 /*yield*/, this.postService.load(1)];
+                    case 3:
+                        _a.sent();
                         return [4 /*yield*/, this.postService.create(post)
                             //Put in user's main feed too
                         ];
-                    case 3:
+                    case 4:
                         _a.sent();
                         //Put in user's main feed too
                         return [4 /*yield*/, this.postService.loadMainFeedForWallet(walletAddress)];
-                    case 4:
+                    case 5:
                         //Put in user's main feed too
                         _a.sent();
+                        return [4 /*yield*/, this.postService.load(1)];
+                    case 6:
+                        _a.sent();
                         return [4 /*yield*/, this.postService.create(post)];
-                    case 5:
+                    case 7:
                         _a.sent();
                         return [4 /*yield*/, this.translatePost(post)];
-                    case 6:
+                    case 8:
                         _a.sent();
                         return [2 /*return*/, post];
                 }
@@ -159,14 +165,14 @@ var PostUIService = /** @class */ (function () {
         }
         return images;
     };
-    PostUIService.prototype.getRecentPosts = function (limit, lt, gt) {
+    PostUIService.prototype.getRecentPosts = function (offset, limit, lt, gt) {
         if (lt === void 0) { lt = undefined; }
         if (gt === void 0) { gt = undefined; }
         return __awaiter(this, void 0, void 0, function () {
             var posts, _i, posts_1, post;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.postService.getRecentPosts(limit, lt, gt)];
+                    case 0: return [4 /*yield*/, this.postService.getRecentPosts(offset, limit, lt, gt)];
                     case 1:
                         posts = _a.sent();
                         _i = 0, posts_1 = posts;
