@@ -165,14 +165,14 @@ var PostUIService = /** @class */ (function () {
         }
         return images;
     };
-    PostUIService.prototype.getRecentPosts = function (offset, limit, lt, gt) {
-        if (lt === void 0) { lt = undefined; }
-        if (gt === void 0) { gt = undefined; }
+    PostUIService.prototype.getRecentPosts = function (offset, limit, olderThan, newerThan) {
+        if (olderThan === void 0) { olderThan = undefined; }
+        if (newerThan === void 0) { newerThan = undefined; }
         return __awaiter(this, void 0, void 0, function () {
             var posts, _i, posts_1, post;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.postService.getRecentPosts(offset, limit, lt, gt)];
+                    case 0: return [4 /*yield*/, this.postService.getRecentPosts(offset, limit, olderThan, newerThan)];
                     case 1:
                         posts = _a.sent();
                         _i = 0, posts_1 = posts;
@@ -240,6 +240,8 @@ var PostUIService = /** @class */ (function () {
         });
     };
     PostUIService.prototype.translateContent = function (post) {
+        if (!post.content)
+            return;
         var qdc = new quill_delta_to_html_1.QuillDeltaToHtmlConverter(post.content.ops, {});
         //Render dividers into HTML
         qdc.renderCustomWith(function (customOp, contextOp) {

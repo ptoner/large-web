@@ -10,7 +10,7 @@ declare class PostUIService {
     postReply(parent: Post, content: any, walletAddress: string): Promise<Post>;
     private buildPost;
     getImagesFromPostContentOps(ops: any): string[];
-    getRecentPosts(offset: number, limit: number, lt?: string, gt?: string): Promise<Post[]>;
+    getRecentPosts(offset: number, limit: number, olderThan?: string, newerThan?: string): Promise<Post[]>;
     loadPostImages(): Promise<void>;
     translatePost(post: Post): Promise<void>;
     translateContent(post: Post): string;

@@ -105,8 +105,8 @@ class PostUIService {
 
     }
 
-    async getRecentPosts(offset:number, limit:number, lt:string=undefined, gt:string=undefined): Promise<Post[]> {
-        let posts:Post[] = await this.postService.getRecentPosts(offset, limit, lt, gt)
+    async getRecentPosts(offset:number, limit:number, olderThan: string = undefined, newerThan: string = undefined): Promise<Post[]> {
+        let posts:Post[] = await this.postService.getRecentPosts(offset, limit, olderThan, newerThan)
 
         for (let post of posts) {
             await this.translatePost(post)
@@ -148,6 +148,8 @@ class PostUIService {
     }
 
     translateContent(post: Post): string {
+
+        if (!post.content) return
 
         const qdc = new QuillDeltaToHtmlConverter(post.content.ops, {});
 
