@@ -12,7 +12,7 @@ declare class PostUIService {
     getImagesFromPostContentOps(ops: any): string[];
     getRecentPosts(offset: number, limit: number, olderThan?: string, newerThan?: string): Promise<Post[]>;
     loadPostImages(): Promise<void>;
-    translatePost(post: Post): Promise<void>;
+    translatePost(post: Post): Promise<Post>;
     translateContent(post: Post): string;
     loadPostFeedForWallet(walletAddress: string): Promise<void>;
     loadMainFeedForWallet(walletAddress: string): Promise<void>;

@@ -169,25 +169,27 @@ var PostUIService = /** @class */ (function () {
         if (olderThan === void 0) { olderThan = undefined; }
         if (newerThan === void 0) { newerThan = undefined; }
         return __awaiter(this, void 0, void 0, function () {
-            var posts, _i, posts_1, post;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var posts, translatedPosts, _i, posts_1, post, _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0: return [4 /*yield*/, this.postService.getRecentPosts(offset, limit, olderThan, newerThan)];
                     case 1:
-                        posts = _a.sent();
+                        posts = _c.sent();
+                        translatedPosts = [];
                         _i = 0, posts_1 = posts;
-                        _a.label = 2;
+                        _c.label = 2;
                     case 2:
                         if (!(_i < posts_1.length)) return [3 /*break*/, 5];
                         post = posts_1[_i];
+                        _b = (_a = translatedPosts).push;
                         return [4 /*yield*/, this.translatePost(post)];
                     case 3:
-                        _a.sent();
-                        _a.label = 4;
+                        _b.apply(_a, [_c.sent()]);
+                        _c.label = 4;
                     case 4:
                         _i++;
                         return [3 /*break*/, 2];
-                    case 5: return [2 /*return*/, posts];
+                    case 5: return [2 /*return*/, translatedPosts];
                 }
             });
         });
@@ -222,19 +224,21 @@ var PostUIService = /** @class */ (function () {
     };
     PostUIService.prototype.translatePost = function (post) {
         return __awaiter(this, void 0, void 0, function () {
-            var _a;
+            var translated, _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        post.contentTranslated = this.translateContent(post);
-                        post.dateCreated = moment(post.dateCreated).fromNow();
-                        if (!post.ownerProfilePic) return [3 /*break*/, 2];
-                        _a = post;
+                        translated = {};
+                        Object.assign(translated, post);
+                        translated.contentTranslated = this.translateContent(post);
+                        translated.dateCreated = moment(post.dateCreated).fromNow();
+                        if (!translated.ownerProfilePic) return [3 /*break*/, 2];
+                        _a = translated;
                         return [4 /*yield*/, this.imageService.cidToUrl(post.ownerProfilePic)];
                     case 1:
                         _a.ownerProfilePicSrc = _b.sent();
                         _b.label = 2;
-                    case 2: return [2 /*return*/];
+                    case 2: return [2 /*return*/, translated];
                 }
             });
         });

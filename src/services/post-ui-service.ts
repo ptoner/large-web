@@ -106,13 +106,16 @@ class PostUIService {
     }
 
     async getRecentPosts(offset:number, limit:number, olderThan: string = undefined, newerThan: string = undefined): Promise<Post[]> {
+        
         let posts:Post[] = await this.postService.getRecentPosts(offset, limit, olderThan, newerThan)
 
+        let translatedPosts:Post[] = []
+
         for (let post of posts) {
-            await this.translatePost(post)
+            translatedPosts.push(await this.translatePost(post))
         }
 
-        return posts
+        return translatedPosts
 
     }
 
@@ -135,15 +138,21 @@ class PostUIService {
     }
 
 
-    async translatePost(post: Post): Promise<void> {
+    async translatePost(post: Post): Promise<Post> {
 
-        post.contentTranslated = this.translateContent(post)
-        post.dateCreated = moment(post.dateCreated).fromNow()
+        //@ts-ignore
+        let translated:Post = {}
 
-        if (post.ownerProfilePic) {
-            post.ownerProfilePicSrc = await this.imageService.cidToUrl(post.ownerProfilePic)
+        Object.assign(translated, post)
+
+        translated.contentTranslated = this.translateContent(post)
+        translated.dateCreated = moment(post.dateCreated).fromNow()
+
+        if (translated.ownerProfilePic) {
+            translated.ownerProfilePicSrc = await this.imageService.cidToUrl(post.ownerProfilePic)
         }
         
+        return translated
 
     }
 
